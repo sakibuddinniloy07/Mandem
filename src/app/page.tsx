@@ -5,11 +5,12 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { categories } from "@/lib/categories";
-import { getFeaturedProducts, getNewProducts } from "@/lib/seed-data";
+import { getFeaturedProducts, getNewProducts, getProductsByCategory } from "@/lib/seed-data";
 
 export default function Home() {
   const featured = getFeaturedProducts();
   const newArrivals = getNewProducts();
+  const categoryImage = (slug: string) => getProductsByCategory(slug)[0]?.images[0];
 
   return (
     <div>
@@ -33,18 +34,31 @@ export default function Home() {
       {/* Category strip */}
       <section className="container-max px-4 md:px-6 py-10 md:py-14">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-          {categories.map((c) => (
-            <Link
-              key={c.slug}
-              href={`/shop/${c.slug}`}
-              className="group relative aspect-square bg-ink text-paper flex items-end p-4 overflow-hidden"
-            >
-              <span className="relative z-10 font-display uppercase text-sm md:text-base tracking-wide group-hover:text-accent transition-colors">
-                {c.name}
-              </span>
-              <span className="absolute inset-0 texture-concrete opacity-30 group-hover:opacity-50 transition-opacity" />
-            </Link>
-          ))}
+          {categories.map((c) => {
+            const image = categoryImage(c.slug);
+            return (
+              <Link
+                key={c.slug}
+                href={`/shop/${c.slug}`}
+                className="group relative aspect-square bg-ink text-paper flex items-end p-4 overflow-hidden"
+              >
+                {image && (
+                  <Image
+                    src={image}
+                    alt=""
+                    aria-hidden
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                  />
+                )}
+                <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent transition-colors group-hover:from-ink/90" />
+                <span className="relative z-10 font-display uppercase text-sm md:text-base tracking-wide group-hover:text-accent transition-colors">
+                  {c.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
