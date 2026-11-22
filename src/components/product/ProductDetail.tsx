@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import clsx from "clsx";
-import { Check, Minus, Plus } from "lucide-react";
+import { Check, Minus, Plus, Truck, RotateCcw, ShieldCheck } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { colorsForProduct, sizesForProduct } from "@/lib/seed-data";
 import { formatBDT } from "@/lib/format";
@@ -146,6 +146,23 @@ export function ProductDetail({ product }: { product: Product }) {
         </Button>
       </div>
       {error && <p className="text-sm text-red-700 mt-2">{error}</p>}
+
+      <div className="mt-7 grid grid-cols-3 gap-2 border-t border-b border-concrete-200 py-5 text-center">
+        <div className="flex flex-col items-center gap-1.5">
+          <Truck size={18} />
+          <span className="text-[11px] text-concrete-700 leading-tight">
+            Free delivery over ৳2,500
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-1.5">
+          <RotateCcw size={18} />
+          <span className="text-[11px] text-concrete-700 leading-tight">7-day exchange</span>
+        </div>
+        <div className="flex flex-col items-center gap-1.5">
+          <ShieldCheck size={18} />
+          <span className="text-[11px] text-concrete-700 leading-tight">bKash &amp; COD</span>
+        </div>
+      </div>
 
       <details className="mt-10 border-t border-concrete-200 pt-5">
         <summary className="font-display uppercase text-sm tracking-wide cursor-pointer">

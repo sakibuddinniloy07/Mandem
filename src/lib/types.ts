@@ -67,6 +67,8 @@ export type Order = {
   items: CartLine[];
   subtotal: number;
   shippingFee: number;
+  discount: number;
+  promoCode?: string;
   total: number;
   address: Address;
   status: OrderStatus;

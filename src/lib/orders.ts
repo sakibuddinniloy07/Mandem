@@ -3,6 +3,7 @@ import { generateOrderNumber } from "./format";
 import { calculateShipping } from "./shipping";
 import type { Address, CartLine, Order, OrderStatus } from "./types";
 import { getProductBySlug } from "./seed-data";
+import { calculateDiscount } from "./promo";
 
 // In-memory fallback store, used only when Supabase isn't configured yet.
 // This keeps the storefront fully clickable end-to-end out of the box, but
@@ -22,6 +23,7 @@ export type CreateOrderInput = {
   lines: CartLine[];
   address: Address;
   paymentMethod: "bkash" | "cod";
+  promoCode?: string;
 };
 
 export type CreateOrderResult =
@@ -56,8 +58,11 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
     });
   }
 
+  const { discount, promo, error: promoError } = calculateDiscount(subtotal, input.promoCode);
+  if (promoError) return { ok: false, error: promoError };
+
   const shippingFee = calculateShipping(subtotal, input.address.division);
-  const total = subtotal + shippingFee;
+  const total = Math.max(0, subtotal - discount) + shippingFee;
   const orderNumber = generateOrderNumber();
   const status: OrderStatus = input.paymentMethod === "cod" ? "processing" : "pending_payment";
 
@@ -72,6 +77,8 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
         payment_method: input.paymentMethod,
         subtotal,
         shipping_fee: shippingFee,
+        discount_amount: discount,
+        promo_code: promo?.code ?? null,
         total,
         customer_name: input.address.fullName,
         customer_phone: input.address.phone,
@@ -118,6 +125,8 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
       items: verifiedLines,
       subtotal,
       shippingFee,
+      discount,
+      promoCode: promo?.code,
       total,
       address: input.address,
       status: orderRow.status,
@@ -134,6 +143,8 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
     items: verifiedLines,
     subtotal,
     shippingFee,
+    discount,
+    promoCode: promo?.code,
     total,
     address: input.address,
     status,
@@ -173,6 +184,8 @@ export async function getOrderByNumber(orderNumber: string): Promise<Order | nul
       })),
       subtotal: orderRow.subtotal,
       shippingFee: orderRow.shipping_fee,
+      discount: orderRow.discount_amount ?? 0,
+      promoCode: orderRow.promo_code ?? undefined,
       total: orderRow.total,
       address: {
         fullName: orderRow.customer_name,

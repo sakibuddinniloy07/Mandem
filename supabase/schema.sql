@@ -25,6 +25,8 @@ create table if not exists orders (
   payment_method text not null default 'bkash' check (payment_method in ('bkash','cod')),
   subtotal int not null,
   shipping_fee int not null default 0,
+  discount_amount int not null default 0,
+  promo_code text,
   total int not null,
   customer_name text not null,
   customer_phone text not null,
@@ -99,3 +101,13 @@ begin
     returning *;
 end;
 $$ language plpgsql;
+
+create table if not exists newsletter_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text unique not null,
+  created_at timestamptz not null default now()
+);
+
+alter table newsletter_subscribers enable row level security;
+-- No public policies: signups are inserted by the server (service role) via
+-- /api/newsletter, which also enforces the unique-email de-dupe itself.

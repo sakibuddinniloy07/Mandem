@@ -8,6 +8,7 @@ export async function POST(req: Request) {
       lines: CartLine[];
       address: Address;
       paymentMethod: "bkash" | "cod";
+      promoCode?: string;
     };
 
     if (!body.address?.fullName || !body.address?.phone || !body.address?.addressLine) {
@@ -24,6 +25,7 @@ export async function POST(req: Request) {
       lines: body.lines,
       address: body.address,
       paymentMethod: body.paymentMethod,
+      promoCode: body.promoCode,
     });
 
     if (!result.ok) {

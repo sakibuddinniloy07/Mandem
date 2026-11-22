@@ -3,11 +3,13 @@ import Image from "next/image";
 import type { Product } from "@/lib/types";
 import { formatBDT } from "@/lib/format";
 import { Badge } from "@/components/ui/Badge";
+import { colorsForProduct } from "@/lib/seed-data";
 
 export function ProductCard({ product }: { product: Product }) {
   const onSale = product.compareAtPrice && product.compareAtPrice > product.price;
+  const colors = colorsForProduct(product);
   return (
-    <Link href={`/product/${product.slug}`} className="group block">
+    <Link href={`/product/${product.slug}`} className="group block transition-transform duration-200 hover:-translate-y-1">
       <div className="relative aspect-[4/5] bg-concrete-100 overflow-hidden">
         <Image
           src={product.images[0]}
@@ -39,6 +41,18 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
+        {colors.length > 1 && (
+          <div className="flex items-center gap-1.5 mt-2">
+            {colors.map((c) => (
+              <span
+                key={c.name}
+                title={c.name}
+                className="w-3 h-3 rounded-full border border-concrete-400"
+                style={{ backgroundColor: c.hex }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </Link>
   );

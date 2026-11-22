@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
+import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { categories } from "@/lib/categories";
 import { getFeaturedProducts, getNewProducts } from "@/lib/seed-data";
 
@@ -90,6 +91,8 @@ export default function Home() {
           ))}
         </div>
       </Section>
+
+      <NewsletterSignup />
     </div>
   );
 }

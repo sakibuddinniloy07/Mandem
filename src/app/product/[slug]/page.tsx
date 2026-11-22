@@ -5,6 +5,8 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductDetail } from "@/components/product/ProductDetail";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Section } from "@/components/ui/Section";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { getCategory } from "@/lib/categories";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -32,10 +34,20 @@ export default async function ProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
   const related = getRelatedProducts(product);
+  const category = getCategory(product.categorySlug);
 
   return (
     <div>
-      <div className="container-max px-4 md:px-6 py-8 md:py-14 grid md:grid-cols-2 gap-8 md:gap-14">
+      <div className="container-max px-4 md:px-6 pt-5 md:pt-8">
+        <Breadcrumbs
+          items={[
+            { label: "Shop", href: "/shop" },
+            ...(category ? [{ label: category.name, href: `/shop/${category.slug}` }] : []),
+            { label: product.name },
+          ]}
+        />
+      </div>
+      <div className="container-max px-4 md:px-6 py-6 md:py-10 grid md:grid-cols-2 gap-8 md:gap-14">
         <ProductGallery images={product.images} name={product.name} />
         <ProductDetail product={product} />
       </div>

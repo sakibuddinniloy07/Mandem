@@ -7,6 +7,7 @@ import { useCartStore, cartSubtotal } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { formatBDT } from "@/lib/format";
 import { BANGLADESH_DIVISIONS, calculateShipping } from "@/lib/shipping";
+import { calculateDiscount } from "@/lib/promo";
 import { Button } from "@/components/ui/Button";
 import type { Address } from "@/lib/types";
 
@@ -32,8 +33,29 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [promoInput, setPromoInput] = useState("");
+  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [promoError, setPromoError] = useState<string | null>(null);
+
   const shippingFee = useMemo(() => calculateShipping(subtotal, address.division), [subtotal, address.division]);
-  const total = subtotal + shippingFee;
+  const { discount } = useMemo(() => calculateDiscount(subtotal, appliedPromo), [subtotal, appliedPromo]);
+  const total = Math.max(0, subtotal - discount) + shippingFee;
+
+  function handleApplyPromo() {
+    const { discount: d, promo, error: err } = calculateDiscount(subtotal, promoInput);
+    if (err) {
+      setPromoError(err);
+      setAppliedPromo(null);
+      return;
+    }
+    if (!promo || d === 0) {
+      setPromoError("That promo code isn't valid.");
+      setAppliedPromo(null);
+      return;
+    }
+    setPromoError(null);
+    setAppliedPromo(promo.code);
+  }
 
   function updateField<K extends keyof Address>(key: K, value: Address[K]) {
     setAddress((a) => ({ ...a, [key]: value }));
@@ -48,7 +70,12 @@ export default function CheckoutPage() {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lines: shown, address, paymentMethod: payment }),
+        body: JSON.stringify({
+          lines: shown,
+          address,
+          paymentMethod: payment,
+          promoCode: appliedPromo ?? undefined,
+        }),
       });
       const data = await res.json();
       if (!data.ok) {
@@ -228,11 +255,54 @@ export default function CheckoutPage() {
               </li>
             ))}
           </ul>
+          <div>
+            <label className="block text-xs font-display uppercase tracking-wide text-concrete-600 mb-1.5">
+              Promo Code
+            </label>
+            {appliedPromo ? (
+              <div className="flex items-center justify-between border border-ink px-3 py-2.5 text-sm">
+                <span className="font-display uppercase">{appliedPromo} applied</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAppliedPromo(null);
+                    setPromoInput("");
+                  }}
+                  className="text-xs underline underline-offset-4 text-concrete-600"
+                >
+                  Remove
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <input
+                  value={promoInput}
+                  onChange={(e) => {
+                    setPromoInput(e.target.value);
+                    setPromoError(null);
+                  }}
+                  className="input flex-1"
+                  placeholder="Enter code"
+                />
+                <Button type="button" variant="secondary" onClick={handleApplyPromo}>
+                  Apply
+                </Button>
+              </div>
+            )}
+            {promoError && <p className="text-xs text-red-700 mt-1.5">{promoError}</p>}
+          </div>
+
           <div className="border-t border-concrete-200 pt-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-concrete-600">Subtotal</span>
               <span>{formatBDT(subtotal)}</span>
             </div>
+            {discount > 0 && (
+              <div className="flex justify-between">
+                <span className="text-concrete-600">Discount ({appliedPromo})</span>
+                <span>-{formatBDT(discount)}</span>
+              </div>
+            )}
             <div className="flex justify-between">
               <span className="text-concrete-600">Shipping</span>
               <span>{shippingFee === 0 ? "Free" : formatBDT(shippingFee)}</span>
