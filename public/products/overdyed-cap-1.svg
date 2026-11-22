@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" width="900" height="1125">
+    
+    <defs>
+      <linearGradient id="bg-25" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f3f3f1"/>
+        <stop offset="1" stop-color="#dcdcda"/>
+      </linearGradient>
+      <linearGradient id="shadow-25" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#9a9a98"/>
+        <stop offset="1" stop-color="#6b6b6a"/>
+      </linearGradient>
+    </defs>
+    <rect width="900" height="1125" fill="url(#bg-25)"/>
+    <polygon points="0,0 250,0 -170,1125 0,1125" fill="url(#shadow-25)" opacity="0.55"/>
+    <polygon points="900,0 900,1125 510,1125 810,0" fill="#2a2a29" opacity="0.08"/>
+  
+    
+    <g transform="translate(450 522.5)">
+      <path d="M -150,20 C -150,-110 -80,-180 0,-180 C 80,-180 150,-110 150,20 C 90,45 -90,45 -150,20 Z"
+        fill="#8d8d8b" stroke="#141414" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M -150,20 C -210,35 -230,65 -225,95 L -20,65 C -20,45 -20,30 -20,20 Z" fill="#8d8d8b" stroke="#141414" stroke-width="6" stroke-linejoin="round"/>
+      <line x1="0" y1="-180" x2="0" y2="30" stroke="#141414" stroke-width="4" opacity="0.4"/>
+    </g>
+  
+    
+    <text x="450" y="1077" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900"
+      font-style="italic" font-size="30" letter-spacing="2" fill="#1a1a1a" opacity="0.5">MANDEM</text>
+  
+  </svg>

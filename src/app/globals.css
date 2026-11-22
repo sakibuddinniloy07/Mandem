@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #121212;
+  --color-paper: #fafaf8;
+  --color-concrete-100: #f3f3f1;
+  --color-concrete-200: #e3e2de;
+  --color-concrete-400: #b8b7b2;
+  --color-concrete-600: #8d8d8b;
+  --color-concrete-800: #4a4a48;
+  --color-accent: #c6ff3d;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-concrete-100: var(--color-concrete-100);
+  --color-concrete-200: var(--color-concrete-200);
+  --color-concrete-400: var(--color-concrete-400);
+  --color-concrete-600: var(--color-concrete-600);
+  --color-concrete-800: var(--color-concrete-800);
+  --color-accent: var(--color-accent);
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Brand wordmark lean, matching the MANDEM logo */
+.brand-lean {
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.container-max {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Subtle concrete texture used behind hero / section dividers */
+.texture-concrete {
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0,0,0,0.035) 0, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(0,0,0,0.03) 0, transparent 45%);
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--color-concrete-400);
+  background: var(--color-paper);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-ink);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
