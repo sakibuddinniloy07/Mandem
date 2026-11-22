@@ -15,6 +15,7 @@ type RawProduct = {
   details: string[];
   colors: RawColor[];
   sizes: string[];
+  images?: string[];
 };
 
 // Small deterministic pseudo-random generator so stock counts are stable
@@ -54,7 +55,10 @@ export const products: Product[] = (raw as RawProduct[]).map((p, idx) => ({
   compareAtPrice: p.compareAtPrice,
   description: p.description,
   details: p.details,
-  images: [`/products/${p.slug}-1.svg`, `/products/${p.slug}-2.svg`],
+  // Dummy product photography (Unsplash, free license) where available,
+  // falling back to the generated SVG garment art for any product that
+  // doesn't have a curated photo mapping yet.
+  images: p.images && p.images.length > 0 ? p.images : [`/products/${p.slug}-1.svg`, `/products/${p.slug}-2.svg`],
   variants: buildVariants(p),
   isNew: p.isNew,
   featured: p.featured,

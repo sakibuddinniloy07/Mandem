@@ -9,12 +9,33 @@
     "isNew": true,
     "featured": true,
     "description": "Heavyweight 240gsm cotton tee cut with a dropped shoulder and boxy oversized block. Garment-washed for a broken-in feel from day one.",
-    "details": ["240 GSM 100% combed cotton", "Dropped shoulder, boxy fit", "Ribbed crewneck collar", "Garment-washed finish"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Concrete Grey", "hex": "#8d8d8b" }
+    "details": [
+      "240 GSM 100% combed cotton",
+      "Dropped shoulder, boxy fit",
+      "Ribbed crewneck collar",
+      "Garment-washed finish"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1618453292459-53424b66bb6a?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1618453292610-4119319e5ac7?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "midweight-pocket-tee",
@@ -24,13 +45,36 @@
     "price": 990,
     "featured": true,
     "description": "A tighter, everyday cut in soft midweight cotton with a clean chest pocket. Built to layer under outerwear.",
-    "details": ["190 GSM cotton jersey", "Regular fit", "Chest patch pocket", "Pre-shrunk"],
-    "colors": [
-      { "name": "Off White", "hex": "#e9e7e2" },
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Concrete Grey", "hex": "#8d8d8b" }
+    "details": [
+      "190 GSM cotton jersey",
+      "Regular fit",
+      "Chest patch pocket",
+      "Pre-shrunk"
     ],
-    "sizes": ["S", "M", "L", "XL"]
+    "colors": [
+      {
+        "name": "Off White",
+        "hex": "#e9e7e2"
+      },
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1684321497353-9fd6964abec1?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1677709678785-bbe8227262cf?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "shadow-graphic-tee",
@@ -40,11 +84,29 @@
     "price": 1190,
     "isNew": true,
     "description": "Oversized tee with a tonal back-print inspired by hard architectural light and shadow.",
-    "details": ["220 GSM cotton", "Oversized fit", "Tonal puff-print graphic", "Drop shoulder"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" }
+    "details": [
+      "220 GSM cotton",
+      "Oversized fit",
+      "Tonal puff-print graphic",
+      "Drop shoulder"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1775979654476-89575df179bd?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1775817104298-522393e1d72b?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "concrete-pullover-hoodie",
@@ -55,13 +117,37 @@
     "compareAtPrice": 2690,
     "featured": true,
     "description": "Our signature hoodie in brushed-back fleece. Heavyweight, roomy, and built for Dhaka winters and studio shoots alike.",
-    "details": ["400 GSM brushed fleece", "Relaxed fit", "Kangaroo pocket", "Double-lined hood with flat drawcords"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Concrete Grey", "hex": "#8d8d8b" },
-      { "name": "Off White", "hex": "#e9e7e2" }
+    "details": [
+      "400 GSM brushed fleece",
+      "Relaxed fit",
+      "Kangaroo pocket",
+      "Double-lined hood with flat drawcords"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      },
+      {
+        "name": "Off White",
+        "hex": "#e9e7e2"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1607860087860-c46e865f6ab0?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1632073143817-8cd5b2165e20?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "zip-up-tech-hoodie",
@@ -71,11 +157,28 @@
     "price": 2590,
     "isNew": true,
     "description": "A technical zip hoodie in a water-resistant cotton blend, cut slim through the body with articulated sleeves.",
-    "details": ["Cotton-nylon blend", "Water-resistant finish", "YKK zip", "Slim-tapered fit"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" }
+    "details": [
+      "Cotton-nylon blend",
+      "Water-resistant finish",
+      "YKK zip",
+      "Slim-tapered fit"
     ],
-    "sizes": ["S", "M", "L", "XL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1590103514500-5abdbbd4bf79?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1572877819688-20e3a73b42bf?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "night-shift-bomber",
@@ -85,12 +188,33 @@
     "price": 3890,
     "featured": true,
     "description": "A clean MA-1 inspired bomber in matte ripstop with a quilted liner. The piece that anchors every fit.",
-    "details": ["Matte ripstop shell", "Quilted satin liner", "Rib-knit collar, cuff and hem", "Twin chest zip pockets"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Concrete Grey", "hex": "#8d8d8b" }
+    "details": [
+      "Matte ripstop shell",
+      "Quilted satin liner",
+      "Rib-knit collar, cuff and hem",
+      "Twin chest zip pockets"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1614031679232-0dae776a72ee?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1614110620182-f6cdc3dafd4a?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "overshirt-field-jacket",
@@ -100,12 +224,32 @@
     "price": 3290,
     "isNew": true,
     "description": "Midweight cotton canvas overshirt that works as a jacket or layering shirt. Four-pocket utility front.",
-    "details": ["Heavy cotton canvas", "Four-pocket utility front", "Boxy relaxed fit", "Corozo buttons"],
-    "colors": [
-      { "name": "Concrete Grey", "hex": "#8d8d8b" },
-      { "name": "Off White", "hex": "#e9e7e2" }
+    "details": [
+      "Heavy cotton canvas",
+      "Four-pocket utility front",
+      "Boxy relaxed fit",
+      "Corozo buttons"
     ],
-    "sizes": ["S", "M", "L", "XL"]
+    "colors": [
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      },
+      {
+        "name": "Off White",
+        "hex": "#e9e7e2"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1604821562226-879731efb3e5?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1610903455399-ca6b83ab1977?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "utility-cargo-pants",
@@ -116,12 +260,33 @@
     "compareAtPrice": 2490,
     "featured": true,
     "description": "Tapered cargo pants in brushed twill with reinforced knees and six-pocket utility storage.",
-    "details": ["Brushed cotton twill", "Tapered leg, elastic cuff", "Six utility pockets", "Reinforced knee panels"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Concrete Grey", "hex": "#8d8d8b" }
+    "details": [
+      "Brushed cotton twill",
+      "Tapered leg, elastic cuff",
+      "Six utility pockets",
+      "Reinforced knee panels"
     ],
-    "sizes": ["28", "30", "32", "34", "36"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      }
+    ],
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1584865288642-42078afe6942?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1758267927982-57d1e8f8dcea?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "straight-leg-denim",
@@ -130,11 +295,29 @@
     "kind": "cargo",
     "price": 2490,
     "description": "Rigid 13oz selvedge-style denim cut straight from hip to hem. Fades honestly, wears forever.",
-    "details": ["13oz rigid denim", "Straight fit", "Five-pocket construction", "Raw hem, break-in required"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" }
+    "details": [
+      "13oz rigid denim",
+      "Straight fit",
+      "Five-pocket construction",
+      "Raw hem, break-in required"
     ],
-    "sizes": ["28", "30", "32", "34", "36"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      }
+    ],
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34",
+      "36"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1718252540511-e958742e4165?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1718252540558-7b383b52642e?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "track-jogger",
@@ -144,12 +327,33 @@
     "price": 1690,
     "isNew": true,
     "description": "Tapered fleece joggers with a tailored ankle cuff and zip side pockets for the gym-to-street rotation.",
-    "details": ["320 GSM French terry", "Tapered fit, ribbed cuff", "Zip side pockets", "Drawcord waistband"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Off White", "hex": "#e9e7e2" }
+    "details": [
+      "320 GSM French terry",
+      "Tapered fit, ribbed cuff",
+      "Zip side pockets",
+      "Drawcord waistband"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Off White",
+        "hex": "#e9e7e2"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1649565899064-51e024a0698f?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1649565898958-f6eaa8afa361?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "studio-shorts",
@@ -158,12 +362,32 @@
     "kind": "shorts",
     "price": 1090,
     "description": "Above-the-knee twill shorts with the same utility pocket language as the cargo line.",
-    "details": ["Cotton twill", "Above-knee length", "Side utility pockets", "Relaxed fit"],
-    "colors": [
-      { "name": "Concrete Grey", "hex": "#8d8d8b" },
-      { "name": "Jet Black", "hex": "#141414" }
+    "details": [
+      "Cotton twill",
+      "Above-knee length",
+      "Side utility pockets",
+      "Relaxed fit"
     ],
-    "sizes": ["S", "M", "L", "XL"]
+    "colors": [
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      },
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      }
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1708092046419-eed37b516052?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1656005947689-400af2fa63b1?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "structured-cap",
@@ -173,12 +397,29 @@
     "price": 790,
     "featured": true,
     "description": "A six-panel structured cap with a debossed MANDEM wordmark and an adjustable strap-back.",
-    "details": ["Six-panel structured crown", "Debossed wordmark", "Adjustable strap-back", "Pre-curved brim"],
-    "colors": [
-      { "name": "Jet Black", "hex": "#141414" },
-      { "name": "Off White", "hex": "#e9e7e2" }
+    "details": [
+      "Six-panel structured crown",
+      "Debossed wordmark",
+      "Adjustable strap-back",
+      "Pre-curved brim"
     ],
-    "sizes": ["One Size"]
+    "colors": [
+      {
+        "name": "Jet Black",
+        "hex": "#141414"
+      },
+      {
+        "name": "Off White",
+        "hex": "#e9e7e2"
+      }
+    ],
+    "sizes": [
+      "One Size"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1568246621541-5704b4f0bbf2?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1519079754742-f83afaef6d35?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   },
   {
     "slug": "overdyed-cap",
@@ -188,10 +429,24 @@
     "price": 850,
     "isNew": true,
     "description": "Garment-dyed low-profile cap, unstructured for a softer, broken-in silhouette.",
-    "details": ["Garment-dyed cotton twill", "Unstructured, low profile", "Embroidered eyelets", "Adjustable strap"],
-    "colors": [
-      { "name": "Concrete Grey", "hex": "#8d8d8b" }
+    "details": [
+      "Garment-dyed cotton twill",
+      "Unstructured, low profile",
+      "Embroidered eyelets",
+      "Adjustable strap"
     ],
-    "sizes": ["One Size"]
+    "colors": [
+      {
+        "name": "Concrete Grey",
+        "hex": "#8d8d8b"
+      }
+    ],
+    "sizes": [
+      "One Size"
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1542529727-24cb357c57d2?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75",
+      "https://images.unsplash.com/photo-1604158641245-2eca8c0f9365?w=1000&h=1250&fit=crop&crop=faces,entropy&auto=format&q=75"
+    ]
   }
 ]
