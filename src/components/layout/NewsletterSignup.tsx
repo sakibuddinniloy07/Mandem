@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export function NewsletterSignup() {
 
   return (
     <section className="border-t border-concrete-200">
-      <div className="container-max px-4 md:px-6 py-14 md:py-20 text-center max-w-xl mx-auto">
+      <Reveal className="container-max px-4 md:px-6 py-14 md:py-20 text-center max-w-xl mx-auto">
         <h2 className="font-display uppercase text-2xl md:text-3xl tracking-tight">Join The List</h2>
         <p className="text-concrete-600 mt-3">
           New drops, restocks and early access — straight to your inbox. No spam.
@@ -56,7 +57,7 @@ export function NewsletterSignup() {
           </form>
         )}
         {error && <p className="text-sm text-red-700 mt-3">{error}</p>}
-      </div>
+      </Reveal>
     </section>
   );
 }

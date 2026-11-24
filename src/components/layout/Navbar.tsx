@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ShoppingBag, Search } from "lucide-react";
 import { categories } from "@/lib/categories";
 import { useCartStore, cartCount } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import clsx from "clsx";
 
 export function Navbar() {
@@ -14,6 +15,20 @@ export function Navbar() {
   const openCart = useCartStore((s) => s.open);
   const hydrated = useHydrated();
   const count = hydrated ? cartCount(lines) : 0;
+
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const prevCount = useRef(count);
+
+  useEffect(() => {
+    if (count > prevCount.current && badgeRef.current && !prefersReducedMotion()) {
+      gsap.fromTo(
+        badgeRef.current,
+        { scale: 1.6 },
+        { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" }
+      );
+    }
+    prevCount.current = count;
+  }, [count]);
 
   return (
     // NOTE: the backdrop-blur/background lives on the inner div, not this
@@ -67,7 +82,10 @@ export function Navbar() {
             >
               <ShoppingBag size={21} />
               {count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-ink text-paper text-[10px] font-display w-4 h-4 rounded-full flex items-center justify-center">
+                <span
+                  ref={badgeRef}
+                  className="absolute -top-0.5 -right-0.5 bg-ink text-paper text-[10px] font-display w-4 h-4 rounded-full flex items-center justify-center"
+                >
                   {count}
                 </span>
               )}

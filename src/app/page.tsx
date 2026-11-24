@@ -1,9 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Section } from "@/components/ui/Section";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
+import { Hero } from "@/components/home/Hero";
+import { CategoryTile } from "@/components/home/CategoryTile";
+import { Reveal } from "@/components/motion/Reveal";
 import { categories } from "@/lib/categories";
 import { getFeaturedProducts, getNewProducts, getProductsByCategory } from "@/lib/seed-data";
 
@@ -15,64 +17,32 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative w-full aspect-[16/10] sm:aspect-[21/9] md:aspect-[21/8] overflow-hidden bg-concrete-100">
-        <Image
-          src="/brand/hero-wide.jpg"
-          alt="MANDEM — Men's Apparel, Estd 2K26"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center pb-10 md:pb-16 px-4">
-          <Button href="/shop" size="lg" className="shadow-lg">
-            Shop The Collection
-          </Button>
-        </div>
-      </section>
+      <Hero>
+        <Button href="/shop" size="lg" className="shadow-lg" magnetic>
+          Shop The Collection
+        </Button>
+      </Hero>
 
       {/* Category strip */}
       <section className="container-max px-4 md:px-6 py-10 md:py-14">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-          {categories.map((c) => {
-            const image = categoryImage(c.slug);
-            return (
-              <Link
-                key={c.slug}
-                href={`/shop/${c.slug}`}
-                className="group relative aspect-square bg-ink text-paper flex items-end p-4 overflow-hidden"
-              >
-                {image && (
-                  <Image
-                    src={image}
-                    alt=""
-                    aria-hidden
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 20vw"
-                  />
-                )}
-                <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent transition-colors group-hover:from-ink/90" />
-                <span className="relative z-10 font-display uppercase text-sm md:text-base tracking-wide group-hover:text-accent transition-colors">
-                  {c.name}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
+        <Reveal stagger={0.08} className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+          {categories.map((c) => (
+            <CategoryTile key={c.slug} slug={c.slug} name={c.name} image={categoryImage(c.slug)} />
+          ))}
+        </Reveal>
       </section>
 
       <Section title="Best Sellers" subtitle="The pieces that move every drop." viewAllHref="/shop">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+        <Reveal stagger={0.06} className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
           {featured.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
-        </div>
+        </Reveal>
       </Section>
 
       <section className="bg-ink text-paper">
         <div className="container-max px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
-          <div>
+          <Reveal>
             <h2 className="font-display uppercase text-3xl md:text-5xl leading-[1.05] tracking-tight">
               Built in raw
               <br />
@@ -85,8 +55,8 @@ export default function Home() {
             <Button href="/shop" variant="outline" className="mt-7">
               Explore The Lookbook
             </Button>
-          </div>
-          <div className="relative aspect-square">
+          </Reveal>
+          <Reveal delay={0.15} className="relative aspect-square">
             <Image
               src="/brand/hero-square.jpg"
               alt="MANDEM brand visual"
@@ -94,16 +64,16 @@ export default function Home() {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <Section title="New Arrivals" subtitle="Fresh off the rack this week." viewAllHref="/shop">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
+        <Reveal stagger={0.06} className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
           {newArrivals.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
-        </div>
+        </Reveal>
       </Section>
 
       <NewsletterSignup />

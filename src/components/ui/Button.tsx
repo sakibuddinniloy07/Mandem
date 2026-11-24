@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import clsx from "clsx";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { useEffect, useRef, type ButtonHTMLAttributes, type ReactNode, type Ref } from "react";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
@@ -26,6 +29,8 @@ type CommonProps = {
   size?: Size;
   className?: string;
   children: ReactNode;
+  /** Button drifts a few px toward the cursor on hover, then springs back. */
+  magnetic?: boolean;
 };
 
 type ButtonProps = CommonProps &
@@ -43,19 +48,62 @@ export function Button({
   className,
   children,
   href,
+  magnetic = false,
   ...props
 }: ButtonProps | LinkProps) {
   const cls = clsx(base, variants[variant], sizes[size], className);
+  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!magnetic || prefersReducedMotion()) return;
+    const el = ref.current;
+    if (!el) return;
+    const target: HTMLElement = el;
+
+    const xTo = gsap.quickTo(el, "x", { duration: 0.4, ease: "power3.out" });
+    const yTo = gsap.quickTo(el, "y", { duration: 0.4, ease: "power3.out" });
+
+    function handleMove(e: MouseEvent) {
+      const rect = el!.getBoundingClientRect();
+      const relX = e.clientX - (rect.left + rect.width / 2);
+      const relY = e.clientY - (rect.top + rect.height / 2);
+      xTo(relX * 0.25);
+      yTo(relY * 0.3);
+    }
+    function handleLeave() {
+      xTo(0);
+      yTo(0);
+    }
+
+    target.addEventListener("mousemove", handleMove);
+    target.addEventListener("mouseleave", handleLeave);
+    return () => {
+      target.removeEventListener("mousemove", handleMove);
+      target.removeEventListener("mouseleave", handleLeave);
+      gsap.set(el, { x: 0, y: 0 });
+    };
+  }, [magnetic]);
+
   if (href) {
     const { target, onClick } = props as LinkProps;
     return (
-      <Link href={href} target={target} onClick={onClick} className={cls}>
+      <Link
+        ref={ref as Ref<HTMLAnchorElement>}
+        href={href}
+        target={target}
+        onClick={onClick}
+        className={cls}
+      >
         {children}
       </Link>
     );
   }
   return (
-    <button className={cls} {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}>
+    <button
+      ref={ref as Ref<HTMLButtonElement>}
+      className={cls}
+      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );
