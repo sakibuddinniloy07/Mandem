@@ -4,15 +4,15 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CircleUserRound } from "lucide-react";
-import { categories } from "@/lib/categories";
 import { useCartStore, cartCount } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import clsx from "clsx";
 
 const navLinks = [
+  { href: "/new-arrivals", label: "New Arrivals" },
   { href: "/shop", label: "All Products" },
-  ...categories.map((c) => ({ href: `/shop/${c.slug}`, label: c.name })),
+  { href: "/about", label: "About Us" },
 ];
 const menuLinks = [...navLinks, { href: "/orders", label: "Track Order" }];
 
