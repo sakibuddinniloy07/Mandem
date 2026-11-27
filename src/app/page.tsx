@@ -17,16 +17,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <Hero
-        promo={
-          newArrivals[0] && {
-            slug: newArrivals[0].slug,
-            name: newArrivals[0].name,
-            price: newArrivals[0].price,
-            image: newArrivals[0].images[0],
-          }
-        }
-      />
+      <Hero />
 
       {/* Category strip */}
       <section className="container-max px-4 md:px-6 py-10 md:py-14">

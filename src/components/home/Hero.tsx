@@ -4,24 +4,15 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { formatBDT } from "@/lib/format";
 
 const HERO_IMAGE = "/brand/hero-street.jpg";
 
-type Promo = {
-  slug: string;
-  name: string;
-  price: number;
-  image?: string;
-};
-
-export function Hero({ promo }: { promo?: Promo }) {
+export function Hero() {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
-  // Entrance: copy rises in line by line, photo settles, promo card slides up.
+  // Entrance: copy rises in line by line, then the photo settles.
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
@@ -31,8 +22,7 @@ export function Hero({ promo }: { promo?: Promo }) {
         { opacity: 0, y: 28 },
         { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }
       )
-        .fromTo(imageRef.current, { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4 }, "-=0.6")
-        .fromTo(cardRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8 }, "-=0.8");
+        .fromTo(imageRef.current, { scale: 1.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4 }, "-=0.6");
     });
     return () => ctx.revert();
   }, []);
@@ -64,7 +54,7 @@ export function Hero({ promo }: { promo?: Promo }) {
     // Phones/tablets: copy stacked above the photo on sand.
     // Desktop (lg+): the photo fills the screen and slides up under the
     // transparent header (-mt-24 = header height); copy sits bottom-left in
-    // white and the promo card bottom-right.
+    // white.
     <section className="relative bg-sand text-wine lg:-mt-24">
       <div
         ref={textRef}
@@ -103,45 +93,6 @@ export function Hero({ promo }: { promo?: Promo }) {
               dark text sits on a light band as in the reference design. */}
           <div className="hidden lg:block absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-sand via-sand/70 to-transparent" />
         </div>
-
-        {promo && (
-          <div
-            ref={cardRef}
-            className="absolute bottom-5 md:bottom-10 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-2xl bg-sand p-3 md:p-4 flex gap-4 md:gap-6 lg:left-auto lg:right-6 lg:bottom-6 lg:translate-x-0 lg:w-[600px]"
-          >
-            <Link
-              href={`/product/${promo.slug}`}
-              className="relative shrink-0 w-[38%] aspect-square overflow-hidden bg-concrete-200 group"
-            >
-              {promo.image && (
-                <Image
-                  src={promo.image}
-                  alt={promo.name}
-                  fill
-                  sizes="(max-width: 768px) 40vw, 260px"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              )}
-            </Link>
-            <div className="flex-1 flex flex-col justify-between py-1 min-w-0">
-              <div>
-                <p className="font-[family-name:var(--font-serif)] italic font-semibold text-2xl md:text-4xl leading-tight">
-                  Just dropped.
-                </p>
-                <p className="mt-1 md:mt-2 text-sm md:text-base truncate">{promo.name}</p>
-              </div>
-              <div className="flex items-end justify-between gap-3 mt-3">
-                <span className="text-base md:text-xl">{formatBDT(promo.price)}</span>
-                <Link
-                  href={`/product/${promo.slug}`}
-                  className="font-[family-name:var(--font-serif)] italic font-semibold text-xl md:text-2xl underline underline-offset-4 decoration-1 hover:opacity-70 transition-opacity"
-                >
-                  Shop Now
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
