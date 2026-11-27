@@ -24,7 +24,7 @@ export default function Home() {
       </Section>
 
       <section className="bg-ink text-paper">
-        <div className="container-max px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+        <div className="container-max px-4 md:px-6 py-10 md:py-14 grid md:grid-cols-2 gap-8 items-center">
           <Reveal>
             <h2 className="font-display uppercase text-3xl md:text-5xl leading-[1.05] tracking-tight">
               Built in raw
@@ -39,7 +39,7 @@ export default function Home() {
               Explore The Lookbook
             </Button>
           </Reveal>
-          <Reveal delay={0.15} className="relative aspect-square">
+          <Reveal delay={0.15} className="relative aspect-[4/3] md:aspect-[2/1]">
             <Image
               src="/brand/hero-square.jpg"
               alt="MANDEM brand visual"
