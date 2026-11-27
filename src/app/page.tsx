@@ -39,7 +39,7 @@ export default function Home() {
               Explore The Lookbook
             </Button>
           </Reveal>
-          <Reveal delay={0.15} className="relative aspect-[4/3] md:aspect-[16/10]">
+          <Reveal delay={0.15} className="relative aspect-square w-full max-w-[420px] mx-auto md:mx-0 md:justify-self-center">
             <Image
               src="/brand/hero-square.jpg"
               alt="MANDEM brand visual"
