@@ -91,7 +91,7 @@ export function Hero() {
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
           {/* Fades the top of the photo into sand on desktop, so the header's
               dark text sits on a light band as in the reference design. */}
-          <div className="hidden lg:block absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-sand via-sand/70 to-transparent" />
+          <div className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sand/90 via-sand/45 to-transparent" />
         </div>
       </div>
     </section>
