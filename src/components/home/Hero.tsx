@@ -6,8 +6,7 @@ import Link from "next/link";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { formatBDT } from "@/lib/format";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1614031679232-0dae776a72ee?w=2000&q=80&auto=format&fit=crop";
+const HERO_IMAGE = "/brand/hero-street.jpg";
 
 type Promo = {
   slug: string;
@@ -92,11 +91,11 @@ export function Hero({ promo }: { promo?: Promo }) {
         <div ref={imageRef} className="absolute inset-0">
           <Image
             src={HERO_IMAGE}
-            alt="Man in a black quilted jacket standing against a pale wall"
+            alt="Man in a long dark coat and sunglasses walking between city buildings, in black and white"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_25%] lg:object-[center_13%]"
+            className="object-cover object-center lg:object-top"
           />
           {/* Darkens the lower-left corner on desktop so the white copy reads. */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
