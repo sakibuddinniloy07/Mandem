@@ -79,7 +79,7 @@ export function Hero() {
         className="text-center px-5 pt-6 md:pt-10 pb-10 md:pb-14 max-w-3xl mx-auto lg:absolute lg:z-10 lg:left-[9%] lg:bottom-[11%] lg:p-0 lg:mx-0 lg:max-w-lg lg:text-left lg:text-white"
       >
         <h1 className="font-[family-name:var(--font-serif)] italic font-medium text-5xl md:text-7xl lg:text-6xl leading-[1.05] tracking-tight">
-          Built for the Everyday
+          Built for his Everyday
         </h1>
         <p className="mt-4 md:mt-5 lg:mt-4 text-lg md:text-2xl lg:text-xl leading-snug max-w-xl mx-auto lg:mx-0 lg:max-w-sm">
           Heavyweight essentials cut in Dhaka, made to be worn hard and worn often.

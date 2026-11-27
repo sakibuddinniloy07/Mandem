@@ -7,11 +7,10 @@ import { Hero } from "@/components/home/Hero";
 import { CategoryTile } from "@/components/home/CategoryTile";
 import { Reveal } from "@/components/motion/Reveal";
 import { categories } from "@/lib/categories";
-import { getFeaturedProducts, getNewProducts, getProductsByCategory } from "@/lib/seed-data";
+import { getFeaturedProducts, getProductsByCategory } from "@/lib/seed-data";
 
 export default function Home() {
   const featured = getFeaturedProducts();
-  const newArrivals = getNewProducts();
   const categoryImage = (slug: string) => getProductsByCategory(slug)[0]?.images[0];
 
   return (
@@ -63,14 +62,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-
-      <Section title="New Arrivals" subtitle="Fresh off the rack this week." viewAllHref="/shop">
-        <Reveal stagger={0.06} className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
-          {newArrivals.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </Reveal>
-      </Section>
 
       <NewsletterSignup />
     </div>
