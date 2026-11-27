@@ -62,26 +62,33 @@ export function Hero({ promo }: { promo?: Promo }) {
   }, []);
 
   return (
-    <section className="bg-sand text-wine">
-      <div ref={textRef} className="text-center px-5 pt-6 md:pt-10 pb-10 md:pb-14 max-w-3xl mx-auto">
-        <h1 className="font-[family-name:var(--font-serif)] italic font-medium text-5xl md:text-7xl leading-[1.05] tracking-tight">
+    // Phones/tablets: copy stacked above the photo on sand.
+    // Desktop (lg+): the photo fills the screen and slides up under the
+    // transparent header (-mt-24 = header height); copy sits bottom-left in
+    // white and the promo card bottom-right.
+    <section className="relative bg-sand text-wine lg:-mt-24">
+      <div
+        ref={textRef}
+        className="text-center px-5 pt-6 md:pt-10 pb-10 md:pb-14 max-w-3xl mx-auto lg:absolute lg:z-10 lg:left-[9%] lg:bottom-[11%] lg:p-0 lg:mx-0 lg:max-w-lg lg:text-left lg:text-white"
+      >
+        <h1 className="font-[family-name:var(--font-serif)] italic font-medium text-5xl md:text-7xl lg:text-6xl leading-[1.05] tracking-tight">
           Built for the Everyday
         </h1>
-        <p className="mt-4 md:mt-5 text-lg md:text-2xl leading-snug max-w-xl mx-auto">
+        <p className="mt-4 md:mt-5 lg:mt-4 text-lg md:text-2xl lg:text-xl leading-snug max-w-xl mx-auto lg:mx-0 lg:max-w-sm">
           Heavyweight essentials cut in Dhaka, made to be worn hard and worn often.
         </p>
-        <div className="mt-7 md:mt-9">
+        <div className="mt-7 md:mt-9 lg:mt-7">
           <Link
             ref={ctaRef}
             href="/shop"
-            className="inline-block border border-wine px-9 py-3 text-lg md:text-xl transition-colors duration-300 hover:bg-wine hover:text-sand"
+            className="inline-block border border-wine px-9 py-3 text-lg md:text-xl transition-colors duration-300 hover:bg-wine hover:text-sand lg:border-white lg:hover:bg-white lg:hover:text-wine"
           >
             Shop All
           </Link>
         </div>
       </div>
 
-      <div className="relative overflow-hidden aspect-[4/5] sm:aspect-[4/3] lg:aspect-[16/9] bg-concrete-200">
+      <div className="relative overflow-hidden aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:h-screen lg:min-h-[640px] bg-concrete-200">
         <div ref={imageRef} className="absolute inset-0">
           <Image
             src={HERO_IMAGE}
@@ -89,14 +96,16 @@ export function Hero({ promo }: { promo?: Promo }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_25%]"
+            className="object-cover object-[center_25%] lg:object-[center_15%]"
           />
+          {/* Darkens the lower-left corner on desktop so the white copy reads. */}
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
         </div>
 
         {promo && (
           <div
             ref={cardRef}
-            className="absolute bottom-5 md:bottom-10 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-2xl bg-sand p-3 md:p-4 flex gap-4 md:gap-6"
+            className="absolute bottom-5 md:bottom-10 left-1/2 -translate-x-1/2 w-[calc(100%-2.5rem)] max-w-2xl bg-sand p-3 md:p-4 flex gap-4 md:gap-6 lg:left-auto lg:right-6 lg:bottom-6 lg:translate-x-0 lg:w-[600px]"
           >
             <Link
               href={`/product/${promo.slug}`}
