@@ -1,18 +1,36 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
-const HERO_IMAGE = "/brand/hero-street.jpg";
+const HERO_VIDEO = "/brand/hero-video.mp4";
+// First frame of the video: shown while it loads, so playback starts seamlessly,
+// and kept on screen for visitors who prefer reduced motion.
+const HERO_POSTER = "/brand/hero-video-poster.jpg";
 
 export function Hero() {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Entrance: copy rises in line by line, then the photo settles.
+  // Muted, looping background video. Respect reduced-motion by holding the
+  // first frame instead of playing.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (prefersReducedMotion()) {
+      v.pause();
+      v.currentTime = 0;
+      return;
+    }
+    v.play().catch(() => {
+      // Autoplay can be refused (e.g. data saver); the poster stays visible.
+    });
+  }, []);
+
+  // Entrance: copy rises in line by line, then the video settles.
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
@@ -79,13 +97,17 @@ export function Hero() {
 
       <div className="relative overflow-hidden aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:h-screen lg:min-h-[640px] bg-concrete-200">
         <div ref={imageRef} className="absolute inset-0">
-          <Image
-            src={HERO_IMAGE}
-            alt="Man in a long dark coat and sunglasses walking between city buildings, in black and white"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center lg:object-top"
+          <video
+            ref={videoRef}
+            src={HERO_VIDEO}
+            poster={HERO_POSTER}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center lg:object-top"
           />
           {/* Darkens the lower-left corner on desktop so the white copy reads. */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
