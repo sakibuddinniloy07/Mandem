@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories } from "@/lib/categories";
 import { CopyrightYear } from "./CopyrightYear";
+import { SocialIcons } from "@/components/ui/SocialIcons";
 
 export function Footer() {
   return (
@@ -12,6 +13,7 @@ export function Footer() {
             Men&apos;s apparel built in raw concrete, hard light and heavyweight cotton.
             Estd 2K26 &mdash; Dhaka, Bangladesh.
           </p>
+          <SocialIcons className="mt-6" />
         </div>
         <div>
           <p className="font-display uppercase text-xs tracking-widest text-concrete-400 mb-4">Shop</p>

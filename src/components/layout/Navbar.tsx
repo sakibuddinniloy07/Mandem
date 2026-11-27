@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CircleUserRound } from "lucide-react";
+import { SocialIcons } from "@/components/ui/SocialIcons";
 import { useCartStore, cartCount } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
@@ -189,6 +190,7 @@ export function Navbar() {
             ))}
           </ul>
         </nav>
+        <SocialIcons size={24} className="justify-center gap-6 pb-10 pt-6" />
       </div>
     </>
   );

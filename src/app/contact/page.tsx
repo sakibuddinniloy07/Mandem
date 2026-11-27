@@ -1,3 +1,5 @@
+import { SocialIcons } from "@/components/ui/SocialIcons";
+
 export const metadata = { title: "Contact — MANDEM" };
 
 export default function ContactPage() {
@@ -12,6 +14,7 @@ export default function ContactPage() {
         <p>+880 1XXX-XXXXXX</p>
         <p>Uttara, Dhaka, Bangladesh</p>
       </div>
+      <SocialIcons size={24} className="justify-center gap-6 mt-8" />
     </div>
   );
 }
