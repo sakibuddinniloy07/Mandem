@@ -107,8 +107,12 @@ export function Navbar() {
       <header
         ref={headerRef}
         className={clsx(
-          "sticky top-0 z-40 text-ink transition-[translate,background-color] duration-300 ease-out",
-          overHero ? "bg-sand lg:bg-transparent" : "bg-sand",
+          "sticky top-0 z-40 text-ink transition-[translate,background-color,box-shadow] duration-300 ease-out",
+          "bg-sand",
+          overHero && "lg:bg-transparent",
+          // The page is the same beige as the header, so once scrolled a
+          // hairline keeps the header distinct from the content beneath it.
+          !atTop && "shadow-[0_1px_0_var(--color-concrete-200)]",
           hidden && !menuOpen && "-translate-y-full"
         )}
       >

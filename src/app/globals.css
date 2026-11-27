@@ -2,9 +2,9 @@
 
 :root {
   --color-ink: #121212;
-  --color-paper: #fafaf8;
-  --color-concrete-100: #f3f3f1;
-  --color-concrete-200: #e3e2de;
+  --color-paper: #ebe3d9; /* site background: same beige as the header */
+  --color-concrete-100: #e3dace; /* warm grays to sit on the beige */
+  --color-concrete-200: #d6ccbf;
   --color-concrete-400: #b8b7b2;
   --color-concrete-600: #8d8d8b;
   --color-concrete-800: #4a4a48;
