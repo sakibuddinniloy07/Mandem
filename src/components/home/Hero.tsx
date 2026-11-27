@@ -96,7 +96,7 @@ export function Hero({ promo }: { promo?: Promo }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_25%] lg:object-[center_6%]"
+            className="object-cover object-[center_25%] lg:object-[center_13%]"
           />
           {/* Darkens the lower-left corner on desktop so the white copy reads. */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
