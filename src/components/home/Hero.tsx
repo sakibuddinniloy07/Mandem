@@ -96,10 +96,13 @@ export function Hero({ promo }: { promo?: Promo }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_25%] lg:object-[center_15%]"
+            className="object-cover object-[center_25%] lg:object-[center_6%]"
           />
           {/* Darkens the lower-left corner on desktop so the white copy reads. */}
           <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-black/55 via-black/10 to-transparent" />
+          {/* Fades the top of the photo into sand on desktop, so the header's
+              dark text sits on a light band as in the reference design. */}
+          <div className="hidden lg:block absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-sand via-sand/70 to-transparent" />
         </div>
 
         {promo && (

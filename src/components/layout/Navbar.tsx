@@ -112,7 +112,7 @@ export function Navbar() {
           hidden && !menuOpen && "-translate-y-full"
         )}
       >
-        <div className="container-max grid grid-cols-3 items-center px-5 md:px-10 h-20 md:h-24 lg:flex lg:justify-between lg:max-w-none lg:px-14">
+        <div className="mx-auto max-w-[1400px] grid grid-cols-3 items-center px-5 md:px-10 h-20 md:h-24 lg:flex lg:justify-between lg:max-w-none lg:px-14">
           {cartButton("justify-self-start lg:hidden")}
 
           <div className="justify-self-center lg:flex lg:items-center lg:gap-10">
