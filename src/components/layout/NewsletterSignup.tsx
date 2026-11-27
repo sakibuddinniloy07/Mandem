@@ -34,7 +34,7 @@ export function NewsletterSignup() {
 
   return (
     <section className="border-t border-concrete-200">
-      <Reveal className="container-max px-4 md:px-6 py-14 md:py-20 text-center max-w-xl mx-auto">
+      <Reveal className="px-4 md:px-6 py-14 md:py-20 text-center max-w-2xl mx-auto">
         <h2 className="font-display uppercase text-2xl md:text-3xl tracking-tight">Join The List</h2>
         <p className="text-concrete-600 mt-3">
           New drops, restocks and early access — straight to your inbox. No spam.
