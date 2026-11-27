@@ -4,28 +4,16 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/Button";
 import { NewsletterSignup } from "@/components/layout/NewsletterSignup";
 import { Hero } from "@/components/home/Hero";
-import { CategoryTile } from "@/components/home/CategoryTile";
 import { Reveal } from "@/components/motion/Reveal";
-import { categories } from "@/lib/categories";
-import { getFeaturedProducts, getProductsByCategory } from "@/lib/seed-data";
+import { getFeaturedProducts } from "@/lib/seed-data";
 
 export default function Home() {
   const featured = getFeaturedProducts();
-  const categoryImage = (slug: string) => getProductsByCategory(slug)[0]?.images[0];
 
   return (
     <div>
       {/* Hero */}
       <Hero />
-
-      {/* Category strip */}
-      <section className="container-max px-4 md:px-6 py-10 md:py-14">
-        <Reveal stagger={0.08} className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-          {categories.map((c) => (
-            <CategoryTile key={c.slug} slug={c.slug} name={c.name} image={categoryImage(c.slug)} />
-          ))}
-        </Reveal>
-      </section>
 
       <Section title="Best Sellers" subtitle="The pieces that move every drop." viewAllHref="/shop">
         <Reveal stagger={0.06} className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-6 md:gap-y-10">
