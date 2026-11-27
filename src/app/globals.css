@@ -9,6 +9,9 @@
   --color-concrete-600: #8d8d8b;
   --color-concrete-800: #4a4a48;
   --color-accent: #c6ff3d;
+  /* Header + hero only: warm editorial palette */
+  --color-sand: #ebe3d9;
+  --color-wine: #3d1414;
 }
 
 @theme inline {
@@ -20,6 +23,9 @@
   --color-concrete-600: var(--color-concrete-600);
   --color-concrete-800: var(--color-concrete-800);
   --color-accent: var(--color-accent);
+  --color-sand: var(--color-sand);
+  --color-wine: var(--color-wine);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }

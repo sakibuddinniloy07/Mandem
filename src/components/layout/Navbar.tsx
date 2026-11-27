@@ -2,27 +2,35 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ShoppingBag, Search } from "lucide-react";
 import { categories } from "@/lib/categories";
 import { useCartStore, cartCount } from "@/lib/cart-store";
 import { useHydrated } from "@/lib/use-hydrated";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import clsx from "clsx";
 
+const menuLinks = [
+  { href: "/shop", label: "All Products" },
+  ...categories.map((c) => ({ href: `/shop/${c.slug}`, label: c.name })),
+  { href: "/orders", label: "Track Order" },
+];
+
 export function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const lines = useCartStore((s) => s.lines);
   const openCart = useCartStore((s) => s.open);
   const hydrated = useHydrated();
   const count = hydrated ? cartCount(lines) : 0;
 
-  const badgeRef = useRef<HTMLSpanElement>(null);
+  const countRef = useRef<HTMLSpanElement>(null);
   const prevCount = useRef(count);
+  const menuListRef = useRef<HTMLUListElement>(null);
 
+  // Pop the cart count when an item is added.
   useEffect(() => {
-    if (count > prevCount.current && badgeRef.current && !prefersReducedMotion()) {
+    if (count > prevCount.current && countRef.current && !prefersReducedMotion()) {
       gsap.fromTo(
-        badgeRef.current,
+        countRef.current,
         { scale: 1.6 },
         { scale: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" }
       );
@@ -30,113 +38,125 @@ export function Navbar() {
     prevCount.current = count;
   }, [count]);
 
+  // Slide the header away while scrolling down, bring it back on scroll up.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    function onScroll() {
+      const y = window.scrollY;
+      if (y > 120 && y > lastY + 4) setHidden(true);
+      else if (y < lastY - 4 || y <= 120) setHidden(false);
+      lastY = y;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Lock page scroll, support Escape, and stagger the links in while open.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+
+    let ctx: gsap.Context | undefined;
+    if (menuListRef.current && !prefersReducedMotion()) {
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          menuListRef.current!.children,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power3.out", delay: 0.1 }
+        );
+      });
+    }
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+      ctx?.revert();
+    };
+  }, [menuOpen]);
+
   return (
-    // NOTE: the backdrop-blur/background lives on the inner div, not this
-    // <header>, on purpose. A `backdrop-filter` (or `filter`) on an ancestor
-    // makes that ancestor the containing block for any `position: fixed`
-    // descendant (instead of the viewport) in Chromium/WebKit — which was
-    // clipping the mobile nav drawer below to the header's own ~108px
-    // height rather than the full screen. Keeping this <header> itself free
-    // of any filter property lets the fixed drawer size against the
-    // viewport correctly.
-    <header className="sticky top-0 z-40 border-b border-concrete-200">
-      <div className="bg-paper/95 backdrop-blur">
-        <div className="h-11 bg-ink text-paper text-[11px] md:text-xs font-display uppercase tracking-widest flex items-center justify-center text-center px-4">
-          Free delivery inside Dhaka on orders over ৳2,500 &mdash; Cash on Delivery &amp; bKash available
-        </div>
-        <div className="container-max flex items-center justify-between px-4 md:px-6 h-16 md:h-20">
+    <>
+      {/* The full-screen menu is a sibling of <header>, not a child: the
+          header uses a transform to hide on scroll, and a transformed
+          ancestor would become the containing block for this fixed overlay
+          (same class of bug as the earlier backdrop-blur drawer clipping). */}
+      <header
+        className={clsx(
+          "sticky top-0 z-40 bg-sand text-wine transition-transform duration-300 ease-out",
+          hidden && !menuOpen && "-translate-y-full"
+        )}
+      >
+        <div className="container-max grid grid-cols-3 items-center px-5 md:px-10 h-20 md:h-24">
           <button
-            className="md:hidden p-2 -ml-2"
-            aria-label="Open menu"
-            onClick={() => setMobileOpen(true)}
+            onClick={openCart}
+            aria-label={`Open cart, ${count} item${count === 1 ? "" : "s"}`}
+            className="justify-self-start text-lg md:text-xl hover:opacity-70 transition-opacity"
           >
-            <Menu size={22} />
+            Cart (<span ref={countRef} className="inline-block">{count}</span>)
           </button>
 
-          <Link href="/" className="font-display italic font-black text-2xl md:text-3xl tracking-tight">
+          <Link
+            href="/"
+            className="justify-self-center font-display italic font-black text-2xl md:text-[2rem] tracking-tight"
+          >
             MANDEM<span className="align-super text-[10px] not-italic">®</span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 font-display uppercase text-sm tracking-wide">
-            {categories.map((c) => (
-              <Link key={c.slug} href={`/shop/${c.slug}`} className="hover:text-concrete-600 transition-colors">
-                {c.name}
-              </Link>
-            ))}
-            <Link href="/shop" className="hover:text-concrete-600 transition-colors">
-              All Products
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-1">
-            <Link href="/shop" aria-label="Search products" className="hidden sm:inline-flex p-2 hover:text-concrete-600">
-              <Search size={20} />
-            </Link>
-            <Link href="/orders" className="hidden sm:inline-flex font-display uppercase text-xs tracking-wide px-3 py-2 hover:text-concrete-600">
-              Track Order
-            </Link>
-            <button
-              aria-label="Open cart"
-              className="relative p-2 hover:text-concrete-600"
-              onClick={openCart}
-            >
-              <ShoppingBag size={21} />
-              {count > 0 && (
-                <span
-                  ref={badgeRef}
-                  className="absolute -top-0.5 -right-0.5 bg-ink text-paper text-[10px] font-display w-4 h-4 rounded-full flex items-center justify-center"
-                >
-                  {count}
-                </span>
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            className="justify-self-end p-2 -mr-2 group"
+          >
+            <span className="flex flex-col gap-[7px] w-9">
+              <span className="block h-px bg-current transition-transform duration-300 group-hover:translate-x-1" />
+              <span className="block h-px bg-current" />
+              <span className="block h-px bg-current transition-transform duration-300 group-hover:-translate-x-1" />
+            </span>
+          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile drawer */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
         className={clsx(
-          "fixed inset-0 z-50 md:hidden transition-opacity",
-          mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          "fixed inset-0 z-50 bg-sand text-wine transition-opacity duration-300 flex flex-col",
+          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
-        <div
-          className="absolute inset-0 bg-ink/50"
-          onClick={() => setMobileOpen(false)}
-        />
-        <div
-          className={clsx(
-            "absolute left-0 top-0 h-full w-[82%] max-w-xs bg-paper transition-transform duration-300 flex flex-col",
-            mobileOpen ? "translate-x-0" : "-translate-x-full"
-          )}
-        >
-          <div className="flex items-center justify-between h-16 px-5 border-b border-concrete-200">
-            <span className="font-display italic font-black text-xl">MANDEM</span>
-            <button aria-label="Close menu" onClick={() => setMobileOpen(false)} className="p-2 -mr-2">
-              <X size={22} />
-            </button>
-          </div>
-          <nav className="flex flex-col py-2 font-display uppercase tracking-wide text-base overflow-y-auto">
-            <Link href="/shop" onClick={() => setMobileOpen(false)} className="px-5 py-3.5 border-b border-concrete-100">
-              All Products
-            </Link>
-            {categories.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/shop/${c.slug}`}
-                onClick={() => setMobileOpen(false)}
-                className="px-5 py-3.5 border-b border-concrete-100"
-              >
-                {c.name}
-              </Link>
-            ))}
-            <Link href="/orders" onClick={() => setMobileOpen(false)} className="px-5 py-3.5 border-b border-concrete-100">
-              Track Order
-            </Link>
-          </nav>
+        <div className="container-max w-full flex justify-end items-center px-5 md:px-10 h-20 md:h-24">
+          <button
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            className="relative w-10 h-10 -mr-1 group"
+          >
+            <span className="absolute left-1/2 top-1/2 w-9 h-px bg-current -translate-x-1/2 rotate-45 transition-transform duration-300 group-hover:rotate-[135deg]" />
+            <span className="absolute left-1/2 top-1/2 w-9 h-px bg-current -translate-x-1/2 -rotate-45 transition-transform duration-300 group-hover:rotate-45" />
+          </button>
         </div>
+        <nav className="flex-1 flex items-start justify-center pt-6 md:pt-12 overflow-y-auto">
+          <ul ref={menuListRef} className="flex flex-col items-center gap-5 md:gap-6 text-2xl md:text-3xl">
+            {menuLinks.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:bg-current after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-    </header>
+    </>
   );
 }
