@@ -66,7 +66,7 @@ export function Hero({ promo }: { promo?: Promo }) {
     // Desktop (lg+): the photo fills the screen and slides up under the
     // transparent header (-mt-24 = header height); copy sits bottom-left in
     // white and the promo card bottom-right.
-    <section className="relative bg-sand text-wine lg:-mt-24">
+    <section className="relative bg-sand text-ink lg:-mt-24">
       <div
         ref={textRef}
         className="text-center px-5 pt-6 md:pt-10 pb-10 md:pb-14 max-w-3xl mx-auto lg:absolute lg:z-10 lg:left-[9%] lg:bottom-[11%] lg:p-0 lg:mx-0 lg:max-w-lg lg:text-left lg:text-white"
@@ -81,7 +81,7 @@ export function Hero({ promo }: { promo?: Promo }) {
           <Link
             ref={ctaRef}
             href="/shop"
-            className="inline-block border border-wine px-9 py-3 text-lg md:text-xl transition-colors duration-300 hover:bg-wine hover:text-sand lg:border-white lg:hover:bg-white lg:hover:text-wine"
+            className="inline-block border border-ink px-9 py-3 text-lg md:text-xl transition-colors duration-300 hover:bg-ink hover:text-sand lg:border-white lg:hover:bg-white lg:hover:text-ink"
           >
             Shop All
           </Link>

@@ -107,7 +107,7 @@ export function Navbar() {
       <header
         ref={headerRef}
         className={clsx(
-          "sticky top-0 z-40 text-wine transition-[translate,background-color] duration-300 ease-out",
+          "sticky top-0 z-40 text-ink transition-[translate,background-color] duration-300 ease-out",
           overHero ? "bg-sand lg:bg-transparent" : "bg-sand",
           hidden && !menuOpen && "-translate-y-full"
         )}
@@ -160,7 +160,7 @@ export function Navbar() {
         aria-modal="true"
         aria-label="Site menu"
         className={clsx(
-          "fixed inset-0 z-50 bg-sand text-wine transition-opacity duration-300 flex flex-col lg:hidden",
+          "fixed inset-0 z-50 bg-sand text-ink transition-opacity duration-300 flex flex-col lg:hidden",
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
       >
